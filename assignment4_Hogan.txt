@@ -1,0 +1,163 @@
+
+import random
+
+
+
+# no real privite var in python
+# privite attribute are named like __name
+
+# TODO 1: Car class
+class Car:
+    def __init__(self, brand, year, colour, speed):
+        self.brand = brand
+        self.year = year
+        self.colour = colour
+        self.speed = speed
+    def speed_getter(self, speed):
+        return self.speed
+    def speed_setter(self, new_speed): # maybe change from new_speed to something else
+        self.speed = new_speed
+    def __str__(self):
+        return self.colour
+    def move(self):
+        pass
+
+dd = Car("3", "2", "2", "13")
+#print(dd.__str__())
+#a1 = Car("2", 1, 21, 3)
+#print(a1.speed_getter)
+
+# TODO 2: ElectricCar class
+class ElecricCar(Car):
+    def __init__(self, brand, year, colour, speed, battery):
+        self.battery = battery
+        Car.__init__(self, brand, year, colour, speed)
+
+    def charge(self):
+        self.battery = 1000
+
+    def __str__(self):
+        #print(type("self"))
+        return f"Battery: {self.battery} Brand: {self.brand} Year: {self.year} Colour: {self.colour} Speed: {self.speed}"
+
+    def move(self, hours):
+        if (hours * self.speed) >= self.battery:
+            distence_traveled = self.battery
+            self.battery = 0
+            print("a", hours, self.speed)
+            return distence_traveled
+        else:
+            self.battery -= hours * self.speed
+            distence_traveled = int(hours) * int(self.speed)
+            print("b", hours, self.speed)
+            return distence_traveled
+#a = Car("d", "3", "32", "23")
+#a1 = ElecricCar(3, 3, 3, 11, 34) # Speed battery
+#a1.__init__("e")
+#print(a1.__str__()) # remove () at end?
+#print(a1.move(3))
+# TODO 3: GasCar class
+class GasCar:
+    def __init__(self, brand, year, colour, speed, gas):
+        self.gas = gas
+        Car.__init__(self, brand, year, colour, speed)
+
+    def fuel(self, refill):
+        self.gas += refill
+
+    def __str__(self):
+        #print(type("self"))
+        return f"Gas: {self.gas} Brand: {self.brand} Year: {self.year} Colour: {self.colour} Speed: {self.speed}"
+
+    def move(self, hours):
+        if (hours * self.speed) >= self.gas:
+            distence_traveled = self.battery
+            self.gas = 0
+            print("a", hours, self.speed)
+            return distence_traveled
+        else:
+            self.gas -= hours * self.speed
+            distence_traveled = int(hours) * int(self.speed)
+            print("b", hours, self.speed)
+            return distence_traveled
+"""
+a1 = GasCar(3, 3, 3, 11, 34) # Speed battery
+#a1.__init__("e")
+print(a1.__str__()) # remove () at end?
+print(a1.move(3))
+# TODO 4: CarGame class
+"""
+class CarGame:
+    def __init__(self, brands, colours, start_year, end_year):
+        self.brands = brands
+        self.colours = colours 
+        self.start_year = start_year
+        self.end_year = end_year
+    def get_cars(self, num_of_cars):
+        car_list = []
+        while num_of_cars:
+            num_of_cars -= 1
+            #print("test")
+            if (random.randint(0, 1)):
+                car_list.append(ElecricCar(random.choice(self.brands), random.randint(self.start_year, self.end_year), random.choice(self.colours), 0, 0))
+            else:
+                car_list.append(GasCar(random.choice(self.brands), random.randint(self.start_year, self.end_year), random.choice(self.colours), 0, 0))
+        print(car_list)
+        #print(len(car_list))
+        pass
+    #def cars(self):
+     #   pass
+    def check_cars_in(self):
+        #electric_cars, gas_cars = 0, 0
+        #for loop in
+        pass
+        
+
+    def car_race():
+        pass
+    pass
+    # TODO 4.1: __init__ method
+    # TODO 4.2: get_cars() method
+    # TODO 4.3: check_cars_in() method
+    # TODO 4.4: car_race() method
+    # if isinstance(list, subcat):
+    
+    
+    # __rpr__ is used to print lists
+
+wad = CarGame([1, 2, 3], [4, 5, 6], 67, 76)
+wad.get_cars(2)
+
+
+
+
+"""
+
+# == DO NOT MODIFY ANY CODE BELOW THIS LINE ==
+    
+def main():
+    brands = ['Benz', 'BMW', 'Ford', 'Honda', 'Toyota']
+    colors = ['Black', 'Blue', 'Grey', 'Red', 'White']
+    year_start, year_end = 1999, 2023
+    game = CarGame(brands, colors, year_start, year_end)
+
+    print('== Step 1: Getting new cars ===')
+    game.get_cars(5) # 5 random cars
+    for car in game.cars: print(f'\t{car}') # speed & energy = 0
+
+    print('\n== Step 2: Checking cars in race ===')
+    e_car, g_car = game.check_cars_in()   
+    print(f'\t## We have {e_car} ElectricCars, {g_car} GasCars.')
+    for car in game.cars: print(f'\t{car}') # fully charged/fueled
+
+    print('\n=== Step 3: Starting car race ===')
+    game.car_race(5) # 5 hours race, print winners
+    
+    print('\n=== Step 4: Race finished ===')
+    for car in game.cars: print(f'\t{car}') # check speed & energy
+    print('\n== Thank You! ==\n\n')
+
+if __name__ == '__main__':
+    main()
+
+    """
